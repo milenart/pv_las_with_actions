@@ -19,7 +19,7 @@ class TestBdotDownload(QgsPluginBaseTest):
         
         self.dialog.wczytajDaneBdot10k()
         task = getattr(self.dialog, 'bdot_task', None)
-        self.waitForTask(task)
+        self.waitForTask(task, timout=300)
 
         l_drogi = self.project.mapLayersByName(self.module_const.LAYER_NAME_BDOT10K_DROGI)
         
