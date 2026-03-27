@@ -374,14 +374,14 @@ class AnalizaTask(QgsTask):
         # Definiujemy kolumny (pola) w zależności od nazwy warstwy
         if layer_name == NAME_LAYER_OBSZARY:
             pr.addAttributes([
-                QgsField(OUTPUT_ATTRS['nr_ob'], TYPE_INT),
+                QgsField(OUTPUT_ATTRS['nr_ob'], int(TYPE_INT)),
                 QgsField(OUTPUT_ATTRS['adres_lesny'], TYPE_STRING),
                 QgsField(OUTPUT_ATTRS['powierzchnia'], TYPE_DOUBLE, len=10, prec=2)
             ])
         elif layer_name == NAME_LAYER_LINIE or layer_name == NAME_LAYER_DROGI:
             # Dla linii i dróg kolumny są takie same
             pr.addAttributes([
-                QgsField(OUTPUT_ATTRS['nr_ob'], TYPE_INT),
+                QgsField(OUTPUT_ATTRS['nr_ob'], int(TYPE_INT)),
                 QgsField(OUTPUT_ATTRS['odleglosc'], TYPE_DOUBLE, len=10, prec=2),
                 QgsField(OUTPUT_ATTRS['rodzaj'], TYPE_STRING)
             ])
