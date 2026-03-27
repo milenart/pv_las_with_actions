@@ -21,14 +21,14 @@ from ..constants import (
 # Warstwa kompatybilności dla Qt5/Qt6 oraz unikanie DeprecationWarning w QGIS >= 3.30
 if Qgis.QGIS_VERSION_INT >= QGS_VER_INT_MIN:
     # Składnia dla nowszych wersji
-    TYPE_INT = QMetaType.Type.Int
-    TYPE_DOUBLE = QMetaType.Type.Double
-    TYPE_STRING = QMetaType.Type.QString
+    TYPE_INT = int(QMetaType.Type.Int)
+    TYPE_DOUBLE = int(QMetaType.Type.Double)
+    TYPE_STRING = int(QMetaType.Type.QString)
 else:
     # Składnia dla starszych wersji
-    TYPE_INT = QVariant.Int
-    TYPE_DOUBLE = QVariant.Double
-    TYPE_STRING = QVariant.String
+    TYPE_INT = int(QVariant.Int)
+    TYPE_DOUBLE = int(QVariant.Double)
+    TYPE_STRING = int(QVariant.String)
 
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -374,14 +374,14 @@ class AnalizaTask(QgsTask):
         # Definiujemy kolumny (pola) w zależności od nazwy warstwy
         if layer_name == NAME_LAYER_OBSZARY:
             pr.addAttributes([
-                QgsField(OUTPUT_ATTRS['nr_ob'], int(TYPE_INT)),
+                QgsField(OUTPUT_ATTRS['nr_ob'], TYPE_INT),
                 QgsField(OUTPUT_ATTRS['adres_lesny'], TYPE_STRING),
                 QgsField(OUTPUT_ATTRS['powierzchnia'], TYPE_DOUBLE, len=10, prec=2)
             ])
         elif layer_name == NAME_LAYER_LINIE or layer_name == NAME_LAYER_DROGI:
             # Dla linii i dróg kolumny są takie same
             pr.addAttributes([
-                QgsField(OUTPUT_ATTRS['nr_ob'], int(TYPE_INT)),
+                QgsField(OUTPUT_ATTRS['nr_ob'], TYPE_INT),
                 QgsField(OUTPUT_ATTRS['odleglosc'], TYPE_DOUBLE, len=10, prec=2),
                 QgsField(OUTPUT_ATTRS['rodzaj'], TYPE_STRING)
             ])
