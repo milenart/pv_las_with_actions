@@ -26,7 +26,7 @@ jobs:
           qgis/qgis:3.34 \
           sh -c "
             apt-get update && apt-get install -y xvfb &&
-            pip3 install --upgrade pip &&
-            if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi &&
+            pip3 install --upgrade pip --break-system-packages &&
+            if [ -f requirements.txt ]; then pip3 install -r requirements.txt --break-system-packages; fi &&
             xvfb-run python3 -m unittest discover -v -s test
           "
