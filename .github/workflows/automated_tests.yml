@@ -1,0 +1,32 @@
+name: Automatic tests for plugin using QGIS
+
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  testing_min_qgis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Pull qgis image (3.34)
+      run: docker pull qgis/qgis:3.34
+
+    - name: Run requirements and tests
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:/usr/src/plugin \
+          -w /usr/src/plugin \
+          -e PYTHONPATH=/usr/src/plugin \
+          qgis/qgis:3.34 \
+          sh -c "
+            apt-get update && apt-get install -y xvfb &&
+            pip3 install --upgrade pip &&
+            if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi &&
+            xvfb-run python3 -m unittest discover -v -s test
+          "
