@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v4
 
     - name: Pull qgis image (3.34)
       run: docker pull qgis/qgis:3.34
@@ -22,10 +22,11 @@ jobs:
         docker run --rm \
           -v ${{ github.workspace }}:/usr/src/plugin \
           -w /usr/src/plugin \
-          -e PYTHONPATH=/usr/src/plugin \
+          -e PYTHONPATH=/usr/src \
           qgis/qgis:3.34 \
           sh -c "
             apt-get update && apt-get install -y xvfb &&
             python3 -m pip install -r requirements.txt --break-system-packages &&
-            xvfb-run python3 -m unittest discover -v -s test
+            export PYTHONPATH=\$PYTHONPATH:/usr/src/plugin
+            xvfb-run python3 -m unittest discover -v -s test -t .
           "
