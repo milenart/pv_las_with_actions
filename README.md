@@ -2,7 +2,7 @@
 
 ## PL
 
-Wtyczka pozwala na wyznaczanie miejsc lokalizacji dla farm fotowoltaicznych na gruntach w zarządzie Lasów Państwowych.
+Wtyczka pozwala na wyznaczanie miejsc lokalizacji dla farm fotowoltaicznych na gruntach w zarządzie Lasów Państwowych. 
 
 ### Wymagania:
 Warunkiem koniecznym do prawidłowego działania wtyczki jest posiadanie wersji QGIS 3.28.0 lub wyższej.
