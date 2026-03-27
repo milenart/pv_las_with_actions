@@ -27,6 +27,7 @@ jobs:
           sh -c "
             apt-get update && apt-get install -y xvfb &&
             python3 -m pip install -r requirements.txt --break-system-packages &&
-            export PYTHONPATH=\$PYTHONPATH:/usr/src/plugin
+           export PYTHONPATH=/usr/src/plugin:/usr/share/qgis/python/plugins:\$PYTHONPATH
+           export QGIS_PREFIX_PATH=/usr
             xvfb-run python3 -m unittest discover -v -s test -t .
           "
